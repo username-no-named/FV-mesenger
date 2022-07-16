@@ -35,9 +35,7 @@ def index():
                 return file.read()
         return file.read()
     return render_template("index.html")
-
-app.run()
-
-#if __name__ == "__main__":
-#    from waitress import serve
-#    serve(app, host="https://gsites.herokuapp.com/", port=int(os.environ.get('PORT', 8080)))
+    
+if __name__ == "__main__":
+   from waitress import serve
+    serve(app, host="https://fv-mesenger.herokuapp.com/", port=int(os.environ.get('PORT', 8080)))
