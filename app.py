@@ -7,6 +7,7 @@ app = Flask(__name__, template_folder=os.getcwd())
 
 @app.route("/", methods=['GET', 'POST'])
 def index():
+    log = ""
     if request.method == 'POST':
         if request.form.get("register_name"):  # мне кажется странным такой способ определения, но в основном я вижу такое
             login, password, confirm = request.form.values()
@@ -27,15 +28,11 @@ def index():
             if not data.get(login):
                 return "Не зарегистрирован"
             if data.get(login) != password:
-                return "Неправильный пароль"
-            return render_template("suc.html")
-        if request.method == 'POST':
-            if request.form.get("dowland"):
-            with open("database.json", "r") as file:
-                return file.read()
-        return file.read()
+                return render_template("index.html",log='password_incorrect!')
+            return ("Успех")
     return render_template("index.html")
-    
+
+#app.run()
 if __name__ == "__main__":
    from waitress import serve
     serve(app, host="https://fv-mesenger.herokuapp.com/", port=int(os.environ.get('PORT', 8080)))
